@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ClearSkin – Basic Info</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Let's Get to Know You</h1>
+    <form id="basicForm" class="auth-box">
+      <label style ="font-weight:bold">Name :</label>
+      <input type="text" id="name" placeholder="Full Name" required />
+      <label style ="font-weight:bold">Age :</label>
+      <input type="number" id="age" placeholder="Age" required />
+      <label style ="font-weight:bold">Blood Group :</label>
+      <input type="text" id="bloodGroup" placeholder="Blood Group" required />
+
+      <label style ="font-weight:bold">Do you follow any skincare or haircare routine?</label>
+      <select id="routine">
+        <option value="" disabled selected>select</option>
+        <option value="none">No</option>
+        <option value="skincare">Skincare</option>
+        <option value="haircare">Haircare</option>
+        <option value="both">Both</option>
+      </select>
+
+      <label style ="font-weight:bold">What are your concerns about?</label>
+      <select id="concern" required>
+        <option value="" disabled selected>select</option>
+        <option value="skin">Skin</option>
+        <option value="hair">Hair</option>
+      </select>
+
+      <button type="submit">Next</button>
+    </form>
+  </div>
+
+  <script src="basic-info.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearSkin – Hair Questions</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Hair Profile Details</h1>
+    <form id="hairForm" class="auth-box">
+
+      <label for="hairType"><strong>What is your hair type?</strong></label>
+      <select id="hairType" required>
+        <option value="" disabled selected>Select</option>
+        <option value="straight">Straight</option>
+        <option value="wavy">Wavy</option>
+        <option value="curly">Curly</option>
+        <option value="coily">Coily</option>
+      </select>
+
+      <label for="problem"><strong>Do you experience any of the following?</strong></label>
+      <select id="problem" required>
+        <option value="" disabled selected>Select</option>
+        <option value="hairfall">Hair Fall</option>
+        <option value="dandruff">Dandruff</option>
+        <option value="frizz">Frizz</option>
+        <option value="dryness">Dryness</option>
+        <option value="splitends">Split Ends</option>
+        <option value="none">None</option>
+      </select>
+
+      <label for="washFrequency"><strong>How often do you wash your hair?</strong></label>
+      <select id="washFrequency" required>
+        <option value="" disabled selected>Select</option>
+        <option value="daily">Daily</option>
+        <option value="every2days">Every 2 Days</option>
+        <option value="twiceAWeek">Twice a Week</option>
+        <option value="onceAWeek">Once a Week</option>
+      </select>
+
+      <label for="treatment"><strong>Do you use conditioner or hair masks?</strong></label>
+      <select id="treatment" required>
+        <option value="" disabled selected>Select</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="goal"><strong>Preferred haircare goal:</strong></label>
+      <select id="goal" required>
+        <option value="" disabled selected>Select</option>
+        <option value="volume">Add Volume</option>
+        <option value="shine">Add Shine</option>
+        <option value="strengthen">Strengthen Hair</option>
+        <option value="repair">Repair Damage</option>
+      </select>
+
+      <label for="budget"><strong>Your budget for haircare products:</strong></label>
+      <select id="budget" required>
+        <option value="" disabled selected>Select</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+
+      <button type="submit">See My Dashboard</button>
+    </form>
+  </div>
+
+  <script src="hair-questions.js"></script>
+</body>
+</html>

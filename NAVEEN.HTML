@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skincare Suggestion</title>
+  <style>
+    .hidden { display: none; }
+    section { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <section id="authSection">
+    <h2>Sign Up / Login</h2>
+    <form id="signupForm">
+      <h3>Sign Up</h3>
+      <input id="signupEmail" placeholder="Email" required><br>
+      <input id="signupPhone" placeholder="Phone" required><br>
+      <input id="signupUsername" placeholder="Username" required><br>
+      <input id="signupPassword" placeholder="Password" type="password" required><br>
+      <button type="submit">Sign Up</button>
+      <p><a href="#" id="showLogin">Already have an account? Login</a></p>
+    </form>
+
+    <form id="loginForm" class="hidden">
+      <h3>Login</h3>
+      <input id="loginEmail" placeholder="Username" required><br>
+      <input id="loginPassword" placeholder="Password" type="password" required><br>
+      <button type="submit">Login</button>
+      <p><a href="#" id="showSignup">No account? Sign Up</a></p>
+    </form>
+  </section>
+
+  <section id="skincareSection" class="hidden">
+    <h2 id="userGreet"></h2>
+    <button id="logoutBtn">Logout</button>
+
+    <h3>Get Skincare Suggestion</h3>
+    <form id="skincareForm">
+      <input id="age" type="number" placeholder="Age" required><br>
+      <select id="skinType" required>
+        <option value="">Skin Type</option>
+        <option value="oily">Oily</option>
+        <option value="dry">Dry</option>
+        <option value="combination">Combination</option>
+        <option value="normal">Normal</option>
+        <option value="sensitive">Sensitive</option>
+      </select><br>
+      <select id="concern" required>
+        <option value="">Concern</option>
+        <option value="acne">Acne</option>
+        <option value="aging">Aging</option>
+        <option value="pigmentation">Pigmentation</option>
+        <option value="redness">Redness</option>
+        <option value="dullness">Dullness</option>
+        <option value="hydration">Hydration</option>
+      </select><br>
+      <select id="routine">
+        <option value="">Routine Type</option>
+        <option value="minimal">Minimal</option>
+        <option value="standard">Standard</option>
+        <option value="advanced">Advanced</option>
+      </select><br>
+      <input id="allergy" placeholder="Allergies (if any)"><br>
+      <select id="budget">
+        <option value="">Budget</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select><br>
+      <button type="submit">Get Suggestion</button>
+    </form>
+
+    <div id="suggestionBox" style="margin-top: 15px;"></div>
+    <button id="googleProductBtn" style="display:none;">Search Products on Google</button>
+  </section>
+
+  <script>
+    const users = JSON.parse(localStorage.getItem('rrr_users') || '[]');
+    let currentUser = null;
+
+    function saveUsers() {
+        localStorage.setItem('rrr_users', JSON.stringify(users));
+    }
+
+    function show(el) { el.classList.remove('hidden'); }
+    function hide(el) { el.classList.add('hidden'); }
+
+    const signupForm = document.getElementById('signupForm');
+    const loginForm = document.getElementById('loginForm');
+    const authSection = document.getElementById('authSection');
+    const skincareSection = document.getElementById('skincareSection');
+    const userGreet = document.getElementById('userGreet');
+    const suggestionBox = document.getElementById('suggestionBox');
+    const googleProductBtn = document.getElementById('googleProductBtn');
+
+    document.getElementById('showLogin')?.addEventListener('click', e => {
+      e.preventDefault();
+      hide(signupForm); show(loginForm);
+    });
+
+    document.getElementById('showSignup')?.addEventListener('click', e => {
+      e.preventDefault();
+      hide(loginForm); show(signupForm);
+    });
+
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = signupEmail.value.trim();
+      const phone = signupPhone.value.trim();
+      const username = signupUsername.value.trim();
+      const password = signupPassword.value;
+      if (users.find(u => u.email === email || u.phone === phone || u.username === username)) {
+          alert("Account already exists.");
+          hide(signupForm); show(loginForm);
+          return;
+      }
+      users.push({ email, phone, username, password });
+      saveUsers();
+      alert("Signup successful! Please login.");
+      hide(signupForm); show(loginForm);
+    });
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = loginEmail.value.trim();
+      const password = loginPassword.value;
+      const user = users.find(u => u.username === username && u.password === password);
+      if (!user) return alert("Invalid credentials.");
+      currentUser = user;
+      userGreet.textContent = `Welcome, ${user.username}!`;
+      hide(authSection); show(skincareSection);
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      currentUser = null;
+      show(authSection); hide(skincareSection);
+      userGreet.textContent = '';
+      suggestionBox.textContent = '';
+      googleProductBtn.style.display = 'none';
+      hide(loginForm); show(signupForm);
+    });
+
+    document.getElementById('skincareForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const age = document.getElementById('age').value;
+      const skinType = document.getElementById('skinType').value;
+      const concern = document.getElementById('concern').value;
+      const routine = document.getElementById('routine').value;
+      const allergy = document.getElementById('allergy').value.trim();
+      const budget = document.getElementById('budget').value;
+
+      const query = `${concern} skincare for ${skinType} skin ${routine} routine ${budget} budget ${age} age ${allergy ? 'avoid ' + allergy : ''}`;
+      suggestionBox.textContent = `🔎 Searching for: "${query}"`;
+      googleProductBtn.style.display = 'inline-block';
+
+      googleProductBtn.onclick = () => {
+        window.open(`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}`, '_blank');
+      };
+    });
+  </script>
+</body>
+</html>
