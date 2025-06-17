@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ClearSkin – Skin Questions</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,9 +10,10 @@
   <div class="container">
     <h1 class="title">Skin Profile Details</h1>
     <form id="skinForm" class="auth-box">
-      <label style ="font-weight:bold">What is your skin type?</label>
+
+      <label for="skinType"><strong>What is your skin type?</strong></label>
       <select id="skinType" required>
-        <option value="" disabled selected>select</option>
+        <option value="" disabled selected>Select</option>
         <option value="dry">Dry</option>
         <option value="oily">Oily</option>
         <option value="combination">Combination</option>
@@ -20,12 +21,12 @@
         <option value="sensitive">Sensitive</option>
       </select>
 
-      <label style ="font-weight:bold">Do you have any known skin allergies?</label>
-      <input type="text" id="allergy" placeholder="like : fragrance, paraben, etc." />
+      <label for="allergy"><strong>Do you have any known skin allergies?</strong></label>
+      <input type="text" id="allergy" placeholder="e.g., fragrance, paraben, etc." />
 
-      <label style ="font-weight:bold">What’s your major skin concern?</label>
+      <label for="concern"><strong>What’s your major skin concern?</strong></label>
       <select id="concern" required>
-        <option value="" disabled selected>select</option>
+        <option value="" disabled selected>Select</option>
         <option value="acne">Acne</option>
         <option value="aging">Aging</option>
         <option value="pigmentation">Pigmentation</option>
@@ -34,16 +35,16 @@
         <option value="hydration">Dryness</option>
       </select>
 
-      <label style ="font-weight:bold">Do you currently use sunscreen?</label>
+      <label for="sunscreenUse"><strong>Do you currently use sunscreen?</strong></label>
       <select id="sunscreenUse" required>
-        <option value="" disabled selected>select</option>
+        <option value="" disabled selected>Select</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>
 
-      <label style ="font-weight:bold">Are you looking for any specific skincare product?</label>
+      <label for="productType"><strong>Are you looking for any specific skincare product?</strong></label>
       <select id="productType" required>
-        <option value="" disabled selected>select</option>
+        <option value="" disabled selected>Select</option>
         <option value="moisturizer">Moisturizer</option>
         <option value="serum">Serum</option>
         <option value="sunscreen">Sunscreen</option>
@@ -51,17 +52,17 @@
         <option value="all">All of the above</option>
       </select>
 
-      <label style ="font-weight:bold">Preferred skincare routine style:</label>
+      <label for="routine"><strong>Preferred skincare routine style:</strong></label>
       <select id="routine" required>
-        <option value="" disabled selected>select</option>
+        <option value="" disabled selected>Select</option>
         <option value="minimal">Minimal</option>
         <option value="standard">Standard</option>
         <option value="advanced">Advanced</option>
       </select>
 
-      <label style ="font-weight:bold">Your budget for skincare products:</label>
+      <label for="budget"><strong>Your budget for skincare products:</strong></label>
       <select id="budget" required>
-        <option value="" disabled selected>select</option>
+        <option value="" disabled selected>Select</option>
         <option value="low">Low</option>
         <option value="medium">Medium</option>
         <option value="high">High</option>
