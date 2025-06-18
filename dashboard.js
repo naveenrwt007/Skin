@@ -125,3 +125,59 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+
+class PromptElement extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <h3>Hair Suggestions</h3>
+      <ul>
+        <li><strong>Hair Fall:</strong> Use a gentle shampoo, avoid tight hairstyles, and eat a balanced diet rich in protein and vitamins.</li>
+        <li><strong>Dandruff:</strong> Use an anti-dandruff shampoo, keep your scalp clean, and avoid oily hair products.</li>
+        <li><strong>Frizz:</strong> Use a moisturizing conditioner, avoid heat styling, and dry hair with a microfiber towel.</li>
+        <li><strong>Dryness:</strong> Apply nourishing hair oils, use sulfate-free shampoo, and avoid washing hair with hot water.</li>
+        <li><strong>Split Ends:</strong> Trim hair regularly, use leave-in conditioner, and minimize chemical treatments.</li>
+      </ul>
+    `;
+  }
+}
+
+customElements.define('prompt', PromptElement);
+
+document.getElementById('hairForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const answers = {
+    hairFall: form.hairFall.checked,
+    dandruff: form.dandruff.checked,
+    frizz: form.frizz.checked,
+    dryness: form.dryness.checked,
+    splitends: form.splitends.checked
+  };
+  localStorage.setItem('hairAnswers', JSON.stringify(answers));
+  window.location.href = 'dashboard.html'; // Redirect to dashboard
+});
+
+const suggestions = {
+  hairFall: "Use a gentle shampoo, avoid tight hairstyles, and eat a balanced diet rich in protein and vitamins.",
+  dandruff: "Use an anti-dandruff shampoo, keep your scalp clean, and avoid oily hair products.",
+  frizz: "Use a moisturizing conditioner, avoid heat styling, and dry hair with a microfiber towel.",
+  dryness: "Apply nourishing hair oils, use sulfate-free shampoo, and avoid washing hair with hot water.",
+  splitends: "Trim hair regularly, use leave-in conditioner, and minimize chemical treatments."
+};
+
+function showHairSuggestions() {
+  const answers = JSON.parse(localStorage.getItem('hairAnswers') || '{}');
+  let html = '<h3>Your Hair Suggestions</h3><ul>';
+  let any = false;
+  for (const key in suggestions) {
+    if (answers[key]) {
+      html += `<li><strong>${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</strong> ${suggestions[key]}</li>`;
+      any = true;
+    }
+  }
+  if (!any) html += '<li>No issues selected.</li>';
+  html += '</ul>';
+  document.querySelector('prompt').innerHTML = html;
+}
+
+window.addEventListener('DOMContentLoaded', showHairSuggestions);

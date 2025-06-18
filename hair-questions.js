@@ -11,5 +11,5 @@ document.getElementById('hairForm').addEventListener('submit', function (e) {
   };
 
   localStorage.setItem('hairInfo', JSON.stringify(hairInfo));
-  window.location.href = 'dashboard.html';
+  window.location.href = "dashboard.html";
 });
